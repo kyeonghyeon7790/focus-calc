@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>집중력 생산성 계산기</title>
+  <style>
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background-color: #f4f6f8;
+      padding: 30px;
+      text-align: center;
+    }
+    .box {
+      background-color: #ffffff;
+      padding: 28px;
+      border-radius: 14px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      max-width: 420px;
+      margin: auto;
+    }
+    h2 {
+      color: #2e7d32;
+      margin-top: 0;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0 20px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #1976d2;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #1565c0;
+    }
+    .result {
+      margin-top: 20px;
+      color: #0d47a1;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>🎯 집중력 생산성 계산기</h2>
+    <p>오늘 집중한 시간과 총 근무 시간을 입력하세요.</p>
+    <input type="number" id="focusTime" placeholder="집중 시간 (분)">
+    <input type="number" id="workTime" placeholder="총 근무 시간 (분)">
+    <button onclick="calcFocus()">계산하기</button>
+    <div class="result" id="focusResult"></div>
+  </div>
+
+  <script>
+    function calcFocus() {
+      const focus = parseFloat(document.getElementById("focusTime").value);
+      const work = parseFloat(document.getElementById("workTime").value);
+      const result = document.getElementById("focusResult");
+
+      if (isNaN(focus) || isNaN(work) || focus <= 0 || work <= 0 || focus > work) {
+        result.innerText = "⛔ 올바른 값을 입력하세요.";
+        return;
+      }
+
+      const hours = (focus / 60).toFixed(2);
+      const percent = ((focus / work) * 100).toFixed(1);
+      result.innerHTML = `총 집중 시간: ${hours}시간<br>집중력 지수: ${percent}%`;
+    }
+  </script>
+</body>
+</html>
